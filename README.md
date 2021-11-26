@@ -32,4 +32,13 @@ services:
     restart: unless-stopped # если контейнер упал, docker-compose пробует заново его запустить
     ports:
       - "3000:3000" # "порт нашей машины:порт конейнера"
+    environment: # переменные окружения, которые будут видны нашему приложению
+      - PORT=3000
+      - HOST=http://docker-test.com
+      - MONGO_URL=mongodb://api_db:27017/api
+    depends_on: # указываем какой сервис должен собраться перед данным
+      - api_db
+  
+   api_db:
+    image: mongo:latest # образ который берется с hub.docker.com, под копотом тот же dockerfile который конфигурирует сервис
 ```

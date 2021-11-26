@@ -19,7 +19,11 @@ version: '3' # версия docker-compose
 #описываем все сервисы, которые docker-compose
 #должен сбилдить и запустить 
 
-services: 
-    api: 
-        build: ./api 
+services:
+  api:
+    build: ./api # ищем тут докер файл
+    command:
+      - npm run start # запускаем после того как сбилдился образ
+    ports:
+      - "3000:3000" # "порт нашей машины:порт конейнера"
 ```

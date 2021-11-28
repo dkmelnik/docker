@@ -15,7 +15,13 @@
 
 **docker-alpine** - минимизирует образ, выризает все лишнее из линукса 
 
-https://docs.docker.com/compose/compose-file/compose-file-v3/#restart - ссылка на описание полей docker-compose 
+[ ссылка на описание полей docker-compose ](https://docs.docker.com/compose/compose-file/compose-file-v3/#restart "docker-compose restart")
+
+[ Тома - это предпочтительный механизм для хранения данных, созданных и используемых контейнерами Docker")](https://docs.docker.com/storage/volumes/ "docker volume")
+
+``docker-compose -f docker-compose.yml -f docker-compose.development.yml up --build``
+
+берем docker-compose.yml и переписываем смежными полями из docker-compose.development.yml
 
 ## Docker-compose.yml
 
@@ -41,4 +47,10 @@ services:
   
    api_db:
     image: mongo:latest # образ который берется с hub.docker.com, под копотом тот же dockerfile который конфигурирует сервис
+    volumes: #   Тома - это предпочтительный механизм для хранения данных, созданных и используемых контейнерами Docker
+      - mongodb_api:/data/db # обычно данные на линукс из mongo, хранятся по этому пути, мы будем брать их оттуда и прокидывать в контейнер
+
+volumes:
+  mongodb_api:
+
 ```

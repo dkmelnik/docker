@@ -15,14 +15,14 @@ const startServer = () => {
     console.log(`Started api service on port: ${port}`)
     console.log(`On host: ${host}`)
     console.log(`Our db: ${db}`)
-    Post.find(function (err,posts){
-      if (err) return console.log(err)
-      else console.log(posts)
-    })
-    silence.save(function (err, savedSilence){
-      if (err) return console.log(err)
-      else console.log(savedSilence)
-    })
+    // Post.find(function (err,posts){
+    //   if (err) return console.log(err)
+    //   else console.log(posts)
+    // })
+    // silence.save(function (err, savedSilence){
+    //   if (err) return console.log(err)
+    //   else console.log(savedSilence)
+    // })
   })
 }
 

@@ -4,4 +4,4 @@ services:
   api:
     command: npm run dev
     volumes:
-      - ./api/src:/usr/src/app/
+      - ./api/src:/usr/src/app/src/src

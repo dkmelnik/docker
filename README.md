@@ -8,12 +8,12 @@
 **docker-compose** - инструмент, который позволяет
 нам запустить множество контейнеров докера.
 
-**docker-compose.yml** - файл в котором мы 
+**docker-compose.yml** - файл в котором мы
 пишем нашу конфигурацию
 
 **Dockerhub** - hub.docker.com - можно скачать или запушить существующие образы
 
-**docker-alpine** - минимизирует образ, выризает все лишнее из линукса 
+**docker-alpine** - минимизирует образ, выризает все лишнее из линукса
 
 [ ссылка на описание полей docker-compose ](https://docs.docker.com/compose/compose-file/compose-file-v3/#restart "docker-compose restart")
 
@@ -23,13 +23,16 @@
 
 берем docker-compose.yml и переписываем смежными полями из docker-compose.development.yml
 
+docker-compose.yml это окружение для продакшена, если нам нужно что то изменить для dev режима переписываем поля docker-compose.yml
+в файле docker-compose.development.yml
+
 ## Docker-compose.yml
 
 ```docker-compose.yml
 version: '3' # версия docker-compose
 
 #описываем все сервисы, которые docker-compose
-#должен сбилдить и запустить 
+#должен сбилдить и запустить
 
 services:
   api:
@@ -44,10 +47,10 @@ services:
       - MONGO_URL=mongodb://api_db:27017/api
     depends_on: # указываем какой сервис должен собраться перед данным
       - api_db
-  
+
    api_db:
     image: mongo:latest # образ который берется с hub.docker.com, под копотом тот же dockerfile который конфигурирует сервис
-    volumes: #   Тома - это предпочтительный механизм для хранения данных, созданных и используемых контейнерами Docker
+    volumes: #   Тома - это предпочтительный механизм для хранения данных, созданных и используемых контейнерами Docker, данные храняться вне #контейнер
       - mongodb_api:/data/db # обычно данные на линукс из mongo, хранятся по этому пути, мы будем брать их оттуда и прокидывать в контейнер
 
 volumes:

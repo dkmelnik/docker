@@ -1,17 +1,17 @@
 const express = require('express')
 const {connectDB} = require("./helpers/db");
 const {port, host, db} = require("./configuration");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 const app = express();
 
-const postSchema = { name: String }
-const Post = mongoose.model("Post", postSchema);
+// const postSchema = { name: String }
+// const Post = mongoose.model("Post", postSchema);
 
 
 const startServer = () => {
   app.listen(port, () => {
-    const silence = new Post({ name: 'Zildjian' });
+    // const silence = new Post({ name: 'Zildjian' });
     console.log(`Started api service on port: ${port}`)
     console.log(`On host: ${host}`)
     console.log(`Our db: ${db}`)

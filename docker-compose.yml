@@ -1,15 +1,25 @@
 version: '3'
 
 services:
+  frontend:
+    build: ./frontend
+    container_name: docker-frontend
+    command: npm run start
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+
   api:
     build: ./api
     container_name: docker-api
     command: npm run start
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3001:3001"
     environment:
-      - PORT=3000
+      - PORT=3001
       - HOST=http://docker-test.com
       - MONGO_URL=mongodb://api_db:27017/api
     depends_on:
@@ -21,9 +31,9 @@ services:
     command: npm run start
     restart: unless-stopped
     ports:
-      - "3001:3001"
+      - "3002:3002"
     environment:
-      - PORT=3001
+      - PORT=3002
       - HOST=http://docker-test.com
       - MONGO_URL=mongodb://auth_db:27017/auth
     depends_on:

@@ -35,6 +35,22 @@ version: '3' # версия docker-compose
 #должен сбилдить и запустить
 
 services:
+  frontend:
+    build: ./frontend
+    container_name: docker-frontend
+    command: npm run start
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true #Чтобы проверить это, попробуйте
+     запустить docker-compose up либо с tty , 
+     либо с stdin_open , но не с обоими, 
+     и вы обнаружите, что с stdin_open 
+     вы не входите в terminal контейнера, 
+     в то время как с tty происходит обратное .
+
+
   api:
     build: ./api # ищем тут dockerfile
     command: npm run start # запускаем после того как сбилдился образ

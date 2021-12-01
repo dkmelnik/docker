@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  fetch('http://docker.com/api/posts').then((res) =>{
+    console.log(res)
+  })
   return (
     <div className="App">
       <header className="App-header">

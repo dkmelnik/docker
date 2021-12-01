@@ -15,7 +15,12 @@ const startServer = () => {
 app.get('/test', (req, res) => {
   res.send('Auth working!')
 })
-
+app.get('/api/currentUser', (req,res)=>{
+  res.json({
+    id: "124134",
+    email: "docker-test@gmail.com"
+  })
+})
 connectDB()
   .on('error', () => console.log("err"))
   .on('disconnected', connectDB)

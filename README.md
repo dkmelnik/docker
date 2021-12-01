@@ -105,5 +105,9 @@ server{
     location / { # все запросы на / буудт проксированы на proxy_pass
         proxy_pass http://frontend:3000;
     }
+     location /api { #
+            proxy_pass http://api:3001;
+            rewrite ^/api/(.*)$1 break;
+    }
 }
 ```

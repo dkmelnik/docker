@@ -1,11 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
 
 function App() {
-  fetch('http://docker.com/api/posts').then((res) =>{
-    console.log(res)
-  })
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,8 +18,18 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React !!!!!!!!111
+          Learn React !
         </a>
+        <button onClick={() => {
+          axios('/api/testwithcurruntuser').then(res => {
+            console.log(res)
+          })
+        }}>make api req</button>
+        <button onClick={() => {
+          axios('/auth/api/testwithapidata').then(res => {
+            console.log(res)
+          })
+        }}>make auth req</button>
       </header>
     </div>
   );

@@ -68,8 +68,29 @@ services:
     image: mongo:latest # образ который берется с hub.docker.com, под копотом тот же dockerfile который конфигурирует сервис
     volumes: #   Тома - это предпочтительный механизм для хранения данных, созданных и используемых контейнерами Docker, данные храняться вне #контейнер
       - mongodb_api:/data/db # обычно данные на линукс из mongo, хранятся по этому пути, мы будем брать их оттуда и прокидывать в контейнер
-
+   nginx:
+    image: nginx:stable-alpine #минимальный образ 
+    container_name: docker-nginx
+    ports: 
+      - "80:80"
+    volumes: # прокидываем файл конфигурации nginx в контейнер
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on: # серис вронтенда дожен быть сбилжен раньше, чтобы nginx смог проксировать запросы
+      - frontend
 volumes:
   mongodb_api:
 
+```
+
+
+```nginx
+server{
+    listen 80; #слушаем 80 порт
+
+    server_name docker.com; #указываем домен
+
+    location / { # все запросы на / буудт проксированы на proxy_pass
+        proxy_pass http://frontend:3000;
+    }
+}
 ```

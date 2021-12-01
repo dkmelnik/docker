@@ -43,13 +43,14 @@ services:
     ports:
       - "3000:3000"
     stdin_open: true
-    tty: true #Чтобы проверить это, попробуйте
-     запустить docker-compose up либо с tty , 
-     либо с stdin_open , но не с обоими, 
-     и вы обнаружите, что с stdin_open 
-     вы не входите в terminal контейнера, 
-     в то время как с tty происходит обратное .
-
+    tty: true # Чтобы проверить это, попробуйте
+     # запустить docker-compose up либо с tty , 
+     # либо с stdin_open , но не с обоими, 
+     # и вы обнаружите, что с stdin_open 
+     # вы не входите в terminal контейнера, 
+     # в то время как с tty происходит обратное .
+     networks:
+      - docker-network
 
   api:
     build: ./api # ищем тут dockerfile
@@ -63,11 +64,16 @@ services:
       - MONGO_URL=mongodb://api_db:27017/api
     depends_on: # указываем какой сервис должен собраться перед данным
       - api_db
-
+    networks:
+      - docker-network
+      
    api_db:
     image: mongo:latest # образ который берется с hub.docker.com, под копотом тот же dockerfile который конфигурирует сервис
     volumes: #   Тома - это предпочтительный механизм для хранения данных, созданных и используемых контейнерами Docker, данные храняться вне #контейнер
       - mongodb_api:/data/db # обычно данные на линукс из mongo, хранятся по этому пути, мы будем брать их оттуда и прокидывать в контейнер
+    networks:
+      - docker-network
+      
    nginx:
     image: nginx:stable-alpine #минимальный образ 
     container_name: docker-nginx
@@ -77,8 +83,15 @@ services:
       - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
     depends_on: # серис вронтенда дожен быть сбилжен раньше, чтобы nginx смог проксировать запросы
       - frontend
+    networks:
+      - docker-network
+      
 volumes:
   mongodb_api:
+  
+networks: # настройки сети которую создает docker-compose
+  docker-network: # driver
+    driver: bridge
 
 ```
 

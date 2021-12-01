@@ -1,6 +1,7 @@
 const express = require('express')
 const {connectDB} = require("./helpers/db");
-const {port, host, db} = require("./configuration");
+const {port, host, db, apiUrl} = require("./configuration");
+const axios = require('axios').default;
 
 const app = express();
 
@@ -19,6 +20,14 @@ app.get('/api/currentUser', (req,res)=>{
   res.json({
     id: "124134",
     email: "docker-test@gmail.com"
+  })
+})
+app.get('/testwithapidata', (req,res)=> {
+  axios.get(apiUrl + "/testapigetdata").then(response => {
+    res.json({
+      testapigetdata: true,
+      currentApiData: response.data
+    })
   })
 })
 connectDB()

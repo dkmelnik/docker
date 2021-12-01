@@ -30,6 +30,11 @@ const startServer = () => {
 app.get('/test', (req, res) => {
   res.send('Api working!')
 })
+app.get('/api/testapigetdata', (req,res) => {
+  res.json({
+    testWithApi: true,
+  })
+})
 app.get('/testwithcurruntuser', (req,res) => {
   axios.get(authApiUrl + "/currentUser").then(response => {
     res.json({

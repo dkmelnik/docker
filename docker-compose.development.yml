@@ -2,23 +2,14 @@ version: "3"
 
 services:
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.dev
-    command: npm run start
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./frontend/src:/usr/src/app/src
+    command: "sh -c 'npm i && npm run start'"
+    environment:
+      - NEXT_PUBLIC_APP_ENV=local
   api:
-    command: npm run dev
-    volumes:
-      - ./api/src:/usr/src/app/src
+    command: "sh -c 'npm i && npm run start:debug'"
 
   auth:
-    command: npm run dev
-    volumes:
-      - ./auth/src:/usr/src/app/src
+    command: "sh -c 'npm i && npm run start:debug'"
 
   nginx:
     volumes:

@@ -2,41 +2,53 @@ version: '3'
 
 services:
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.prod
     container_name: docker-frontend
-    command: serve -s build -l 3000
+    environment:
+      - NEXT_PUBLIC_APP_ENV=local-production
+    image: node:18.8.0
+    command: "sh -c 'npm i && npm run build && npm run start'"
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./frontend:/home/node/app
     restart: unless-stopped
     networks:
       - docker-network
 
-
   api:
-    build: ./api
     container_name: docker-api
-    command: npm run start
-    restart: unless-stopped
     environment:
+      - NODE_ENV=local
       - PORT=3001
-      #- HOST=http://docker.com
+      - HOST=http://docker.com
       - MONGO_URL=mongodb://api_db:27017/api
       - AURH_API_URL=http://auth:3002/api
+    image: node:18.8.0
+    working_dir: /home/node/app
+    user: "node"
+    volumes:
+      - ./api:/home/node/app
+    command: npm run start
+    restart: unless-stopped
     depends_on:
       - api_db
     networks:
       - docker-network
 
   auth:
-    build: ./auth
     container_name: docker-auth
-    command: npm run start
-    restart: unless-stopped
     environment:
       - PORT=3002
-      #- HOST=http://docker.com
+      - HOST=http://docker.com
       - MONGO_URL=mongodb://auth_db:27017/auth
       - API_URL=http://api:3001/api
+    image: node:18.8.0
+    working_dir: /home/node/app
+    user: "node"
+    volumes:
+      - ./auth:/home/node/app
+    command: npm run start
+    restart: unless-stopped
     depends_on:
       - auth_db
     networks:

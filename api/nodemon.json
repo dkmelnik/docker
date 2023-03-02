@@ -1,5 +1,6 @@
 {
-  "verbose": false,
   "watch": ["src"],
-  "exec": "node --inspect=0.0.0.0:9229 src/index.js"
+  "ext": "ts,json",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "node --inspect-brk=0.0.0.0:9229 --require /home/node/app/node_modules/ts-node/register src/main.ts"
 }

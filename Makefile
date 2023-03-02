@@ -6,3 +6,6 @@ logs.auth:
 	docker-compose logs -f auth
 logs.frontend:
 	docker-compose logs -f frontend
+
+exec.api:
+	docker-compose exec api sh

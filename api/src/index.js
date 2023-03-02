@@ -28,7 +28,7 @@ const startServer = () => {
 }
 
 app.get('/test', (req, res) => {
-  res.send('Api working!')
+  res.send('Api working!!!!!!')
 })
 app.get('/api/testapigetdata', (req,res) => {
   res.json({

@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "start:debug": "node --inspect=0.0.0.0:9229 src/index.js",
     "dev": "nodemon"
   },
   "author": "",

@@ -1,5 +1,5 @@
 {
   "verbose": false,
   "watch": ["src"],
-  "exec": "node src/index.js"
+  "exec": "node --inspect=0.0.0.0:9229 src/index.js"
 }

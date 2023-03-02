@@ -6,10 +6,10 @@ services:
     environment:
       - NEXT_PUBLIC_APP_ENV=local
   api:
-    command: "sh -c 'npm i && npm run start:debug'"
+    command: "sh -c 'npm i && npm run dev'"
 
   auth:
-    command: "sh -c 'npm i && npm run start:debug'"
+    command: "sh -c 'npm i && npm run dev'"
 
   nginx:
     volumes:

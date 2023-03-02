@@ -28,6 +28,8 @@ services:
     user: "node"
     volumes:
       - ./api:/home/node/app
+    ports:
+      - "9229:9229"
     command: npm run start
     restart: unless-stopped
     depends_on:

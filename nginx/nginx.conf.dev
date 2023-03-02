@@ -1,7 +1,7 @@
 server{
     listen 80;
 
-    server_name docker.local;
+    server_name docker.loc;
 
     location / {
         proxy_pass http://frontend:3000;

@@ -2,7 +2,7 @@ version: "3"
 
 services:
   frontend:
-    command: "sh -c 'npm i && npm run start'"
+    command: "sh -c 'npm i && npm run dev'"
     environment:
       - NEXT_PUBLIC_APP_ENV=local
   api:
